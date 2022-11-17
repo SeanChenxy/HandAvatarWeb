@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html>
+
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>HandAvatar</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="./files/bootstrap.min.css">
+    <link rel="stylesheet" href="./files/font-awesome.min.css">
+    <link rel="stylesheet" href="./files/codemirror.min.css">
+    <link rel="stylesheet" href="./files/app.css">
+
+
+
+
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h1 class="col-md-20 text-center">
+                <br></br>
+                <b>HandAvatar</b>: <br> Free-Pose Hand Animation and Rendering from Monocular Video<br>
+                <small>
+                    arXiv 2022
+                </small>
+            </h1>
+            <hr style="margin-top:0px">
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://seanchenxy.github.io/" style="font-size: 16px;">
+                            Xingyu Chen
+                        </a>
+                        <!-- <sup>1</sup> -->
+                    </li>
+                    <li>
+                        <a href="https://sites.google.com/site/zjuwby/" style="font-size: 16px;">
+                            Baoyuan Wang
+                        </a>
+                        <!-- <sup>2</sup> -->
+                    </li>
+                    <li>
+                        <a href="https://scholar.google.com.hk/citations?user=9akH-n8AAAAJ&hl=en" style="font-size: 16px;">
+                            Heung-Yeung Shum
+                        </a>
+                        <!-- <sup>3</sup> -->
+                    </li>
+                    <br>
+                    <a></a><br>
+                    <li>
+                        <!-- <sup>1</sup> -->
+                        <a href="https://www.xiaoice.com/" style="font-size: 16px;">
+                            Xiaobing.AI
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 text-center">
+                <ul class="nav nav-pills nav-justified">
+                    <li>
+                        <a href="">
+                            <img src="./asserts/arxiv.png" height="60px">
+                            <h4><strong>Paper</strong></h4>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a onClick="alert('Code coming soon!\nContact chenxingyu@xiaobing.ai for more details.')">
+                        <!-- <a href=""> -->
+                            <img src="./asserts/github.png" height="60px">
+                            <h4><strong>Code (coming soon)</strong></h4>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <a>
+                    <!-- <img style="width:100%;height:100%;" playsinline autoplay loop preload muted>
+                        <source src="./asserts/teaser.png">
+                    </img> -->
+                    <img  style="width:100%;height:100%;" src="./asserts/teaser.png">
+                </a>
+                <br></br>
+                <h2>
+                    Abstract
+                </h2>
+                <hr style="margin-top:0px">
+                <p class="text-justify" style="font-size: 16px;">
+                    We present HandAvatar, a novel representation for hand
+                    animation and rendering, which can generate smoothly
+                    compositional geometry and self-occlusion-aware texture.
+                    Specifically, we first develop a MANO-HD model as a highresolution 
+                    mesh topology to fit personalized hand shapes.
+                    Sequentially, we decompose hand geometry into per-bone
+                    rigid parts, and then re-compose paired geometry encodings to derive 
+                    an across-part consistent occupancy field.
+                    As for texture modeling, we propose a self-occlusion-aware
+                    shading field (SelF). In SelF, drivable anchors are paved
+                    on the MANO-HD surface to record albedo information
+                    under a wide variety of hand poses. Moreover, directed
+                    soft occupancy is designed to describe the ray-to-surface
+                    relation, which is leveraged to generate an illumination
+                    field for the disentanglement of pose-independent albedo
+                    and pose-dependent illumination. Trained from monocular video data, 
+                    our HandAvatar can perform free-pose hand
+                    animation and rendering while at the same time achieving superior appearance fidelity. 
+                    We also demonstrate that HandAvatar provides a route for hand appearance editing.
+                </p>
+            </div>
+        </div>
+
+        <!-- <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <br></br>
+                <h2>
+                    Video
+                </h2>
+                <hr style="margin-top:0px">
+                <div class="text-center">
+                    <div style="position:relative;padding-top:56.25%;">
+                        <iframe src="https://www.youtube.com/embed/hBJWZwl_JCI" allowfullscreen=""
+                            style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <br></br>
+                <h2>
+                    Overview
+                </h2>
+                <hr style="margin-top:0px">
+                <img src="./asserts/framework.png" class="img-responsive" alt="overview"><br>
+                <p class="text-justify" style="font-size: 16px;">
+                    HandAvatar overview. Given hand pose, MANO-HD produces personalized mesh, while PariOF yields accordingly occupancy
+                    field. SelF estimates albedo and illumination fields under self-occlusion. Then, hand appearance is synthesized by volume rendering.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <br></br>
+                <h2>
+                    Disentanglement of Albedo and Illumination
+                </h2>
+                <hr style="margin-top:0px">
+                <img src="./asserts/illum.png" class="img-responsive" alt="illum"><br>
+                <p class="text-justify" style="font-size: 16px;">
+                    Effects of the disentangled albedo and illumination fields in SelF. (a) Coupled albedo and illumination. (b,c) Disentangled albedo
+                    and illumination; directed soft occupancy is not involved in (b); from left to right: albedo, illumination, shaded image. (d) Ground truth.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <br></br>
+                <h2>
+                    Comparisons with Prior Arts
+                </h2>
+                <hr style="margin-top:0px">
+                <!-- <p style="text-align: center"> -->
+                <div align="center">
+                    <img src="./asserts/compare.png" class="img-responsive" alt="compare"><br>
+                </div>
+                <p class="text-justify" style="font-size: 16px; text-align: center">
+                    Visualization results of SelfRecon, HumanNeRF, and our HandAvatar on free-pose animation and rendering.
+                </p>
+            </div>
+        </div>
+
+
+
+        <!-- <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <br></br>
+                <h2>
+                    Generation Results
+                </h2>
+                <hr style="margin-top:0px">
+                <p class="text-justify" style="font-size: 16px;">
+                    GRAM is able to generate high-quality images with fine details. Moreover, it allows an explicit
+                    control of camera viewpoint and achieves highly consistent results across different views.
+                    It even maintains strong visual 3D consistency for very thin structures such as bangs of hair,
+                    eyeglass, and whiskers of cat.
+                </p>
+                <video style="width:100%;height:100%;" playsinline autoplay loop preload muted>
+                    <source src="./files/result.mp4" type="video/mp4">
+                </video>
+                <hr style="margin-top:0px">
+                <p class="text-justify" style="font-size: 16px;">
+                    GRAM achieves the best visual quality with realistic details and remarkable 3D consistency on
+                    multiple datasets comparing with previous 3D-aware image generation methods.
+                </p>
+                <video style="width:100%;height:100%;" playsinline autoplay loop preload muted>
+                    <source src="./files/compare.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div> -->
+
+        <!-- <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <br></br>
+                <h2>
+                    Manifolds Visualization
+                </h2>
+                <hr style="margin-top:0px">
+                <p class="text-justify" style="font-size: 16px;">
+                    GRAM constrains point sampling and radiance field learning on 2D manifolds, embodied as a set of
+                    implicit surfaces. These implicit surfaces are shared for the trained object category, jointly
+                    learned with GAN training, and fixed at inference time.
+                </p>
+                <video style="width:93%;height:93%;" playsinline autoplay loop preload muted>
+                    <source src="./files/manifold.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div> -->
+
+        <!-- <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <br></br>
+                <h2>
+                    3D Geometry Visualization
+                </h2>
+                <hr style="margin-top:0px">
+                <p class="text-justify" style="font-size: 16px;">
+                    Although GRAM confines the input domain of the radiance field on 2D manifolds, we can still extract
+                    proxy 3D shapes of the generated objects using the volume-based marching cubes algorithm. It can be
+                    observed that GRAM produces high-quality geometry with detailed structures well depicted, which is
+                    the key to achieve strong visual
+                    3D consistency across different views.
+                </p>
+                <video style="width:100%;height:100%;" playsinline autoplay loop preload muted>
+                    <source src="./files/shape.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div> -->
+
+<!--         <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <br></br>
+                <h2>
+                    Image Embedding and Editing
+                </h2>
+                <hr style="margin-top:0px">
+                <p class="text-justify" style="font-size: 16px;">
+                GAN inversion is naturally supported by GRAM. Given an input image, we can first embed it into the learned latent space and then freely move the camera viewpoint to synthesize images at novel views.
+                </p>
+                <video style="width:67%;height:67%;" playsinline autoplay loop preload muted>
+                    <source src="./files/inv2.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div> -->
+
+        <!-- <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <br></br>
+                <h2>
+                    Responsible AI Considerations
+                </h2>
+                <hr style="margin-top:0px">
+                <p class="text-justify" style="font-size: 16px;">
+                    The goal of this paper is to study generative modelling of the 3D hands from 2D images,
+                    and to provide a method for generating images of free-pose hands.
+                    It is not intended to manipulate existing images nor to create content that is used to mislead or deceive.
+                    This method does not have understanding and control of the generated content.
+                    Thus, adding targeted facial expressions or mouth movements is out of the scope of this work.
+                    However, the method, like all other related AI image generation techniques,
+                    could still potentially be misused for impersonating humans. Currently,
+                    the images generated by this method contain visual artifacts, unnatural texture patterns,
+                    and other unpredictable failures that can be spotted by humans and fake image detection algorithms.
+                    We also plan to investigate applying this technology for advancing 3D- and video-based forgery detection.
+                </p>
+            </div>
+        </div> -->
+
+        <!-- <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <br></br>
+                <h2>
+                    Availability of Software
+                </h2>
+                <hr style="margin-top:0px">
+                <p class="text-justify" style="font-size: 16px;">
+                    Per concerns about misuse of this method, the code is available for use under a research-only license.
+                </p>
+            </div>
+        </div> -->
+
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0">
+                <div class="text-center">
+                    <h2>
+                        Citation
+                    </h2>
+                </div>
+                <hr style="margin-top:0px">
+                <div class="form-group col-md-12 col-md-offset-0">
+                    <div class="CodeMirror cm-s-default CodeMirror-wrap" style="font-size: 16px;">
+                        <div
+                            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 4px; ">
+                            <textarea autocorrect="off" autocapitalize="off" spellcheck="false"
+                                style="position: absolute; padding: 0px; width: 1000px; height: 1em; outline: none;"
+                                tabindex="0"></textarea></div>
+                        <div class="CodeMirror-vscrollbar" cm-not-content="true">
+                            <div style="min-width: 1px; height: 0px;"></div>
+                        </div>
+                        <div class="CodeMirror-hscrollbar" cm-not-content="true">
+                            <div style="height: 100%; min-height: 1px; width: 0px;"></div>
+                        </div>
+                        <div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div>
+                        <div class="CodeMirror-gutter-filler" cm-not-content="true"></div>
+                        <div class="CodeMirror-scroll" tabindex="-1">
+                            <div class="CodeMirror-sizer"
+                                style="margin-left: 0px; margin-bottom: -17px; border-right-width: 13px; min-height: 162px; padding-right: 0px; padding-bottom: 0px;">
+                                <div style="position: relative; top: 0px;">
+                                    <div class="CodeMirror-lines">
+                                        <div style="position: relative; outline: none;">
+                                            <div class="CodeMirror-measure">AخA</div>
+                                            <div class="CodeMirror-measure"></div>
+                                            <div style="position: relative; z-index: 1;"></div>
+                                            <div class="CodeMirror-cursors">
+                                                <div class="CodeMirror-cursor"
+                                                    style="left: 4px; top: 0px; height: 17.1406px;">&nbsp;</div>
+                                            </div>
+                                            <div class="CodeMirror-code" style="">
+                                                <pre
+                                                    class=" CodeMirror-line "><span style="padding-right: 0.1px;">@inproceedings{bib:handavatar,</span></pre>
+                                                <pre
+                                                    class=" CodeMirror-line "><span style="padding-right: 0.1px;"> &nbsp;  title={Hand Avatar: Free-Pose Hand Animation and Rendering from Monocular Video},</span></pre>
+                                                <pre
+                                                    class=" CodeMirror-line "><span style="padding-right: 0.1px;"> &nbsp;  author={Chen, Xingyu and Wang, Baoyuan and Shum, Heung-Yeung},</span></pre>
+                                                <pre
+                                                    class=" CodeMirror-line "><span style="padding-right: 0.1px;"> &nbsp;  booktitle={arXiv},</span></pre>
+                                                <pre
+                                                    class=" CodeMirror-line "><span style="padding-right: 0.1px;"> &nbsp;  year={2022}</span></pre>
+                                                <pre
+                                                    class=" CodeMirror-line "><span style="padding-right: 0.1px;">}</span></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="position: absolute; height: 13px; width: 1px; top: 280px;"></div>
+                            <div class="CodeMirror-gutters" style="display: none; height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <br></br>
+                <h2>
+                    Acknowledgements
+                </h2>
+                <hr style="margin-top:0px">
+                <p class="text-justify" style="font-size: 16px;">
+                    We thank Yu Deng for the fruitful advice and discussion to improve the paper. <br>
+                    The website template was adapted from <a href="https://yudeng.github.io/GRAM/">GRAM</a>.
+                </p>
+            </div>
+        </div>
+
+
+</body>
+
+</html>
